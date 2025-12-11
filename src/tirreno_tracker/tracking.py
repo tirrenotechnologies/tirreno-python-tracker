@@ -15,6 +15,7 @@ class Payload:
         "_old_value": "old_value",
         "_field_id": "field_id",
         "_field_name": "field_name",
+        "_value": "value",
     }
 
     def __init__(self) -> None:
@@ -22,6 +23,14 @@ class Payload:
         self._old_value = None
         self._field_id = None
         self._field_name = None
+        self._value = None
+
+    def set_value(self, value: str) -> PayloadType:
+        self._value = value
+        return self
+
+    def get_value(self) -> Optional[str]:
+        return self._value
 
     def set_new_value(self, value: str) -> PayloadType:
         self._new_value = value
@@ -88,6 +97,7 @@ class Event:
 
     OBJ_PROPERTIES = {
         "_payload": "payload",
+        "_field_history": "fieldHistory",
     }
 
     def __init__(self, uuid: str) -> None:
@@ -104,6 +114,7 @@ class Event:
         self._url = None
         self._page_title = None
         self._payload = None
+        self._field_history = None
         self._phone_number = None
         self._email_address = None
         self._first_name = None
@@ -277,18 +288,25 @@ class Event:
     def get_user_created(self) -> Optional[str]:
         return self._user_created
 
-    def set_payload(self, value: List[Payload]) -> EventType:
+    def set_payload(self, value: Payload) -> EventType:
         self._payload = value
         return self
 
-    def get_payload(self) -> Optional[List[Payload]]:
+    def get_payload(self) -> Optional[Payload]:
         return self._payload
 
-    def add_payload(self, value: Payload) -> EventType:
-        if self._payload is None:
-            self._payload = []
+    def set_field_history(self, value: List[Payload]) -> EventType:
+        self._field_history = value
+        return self
 
-        self._payload.append(value)
+    def get_field_history(self) -> Optional[List[Payload]]:
+        return self._field_history
+
+    def add_field_history(self, value: Payload) -> EventType:
+        if self._field_history is None:
+            self._field_history = []
+
+        self._field_history.append(value)
         return self
 
     def set_event_time(self, value: str) -> EventType:
@@ -330,12 +348,15 @@ class Event:
 
         for prop in self.OBJ_PROPERTIES:
             value = getattr(self, prop, None)
-            if value is not None and isinstance(value, list):
-                obj = []
-                for el in value:
-                    if el is not None and isinstance(el, Payload):
-                        obj.append(el.dump())
-                out[self.OBJ_PROPERTIES[prop]] = obj
+            if value is not None:
+                if isinstance(value, list):
+                    obj = []
+                    for el in value:
+                        if el is not None and isinstance(el, Payload):
+                            obj.append(el.dump())
+                    out[self.OBJ_PROPERTIES[prop]] = obj
+                elif isinstance(value, Payload):
+                    out[self.OBJ_PROPERTIES[prop]] = value.dump()
 
         return out
 

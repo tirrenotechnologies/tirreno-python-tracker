@@ -12,10 +12,12 @@ def test_event_serializes_payload(EventCls, PayloadCls, recwarn):
         .set_browser_language("en-gb").set_http_referer("test")
 
     p1 = PayloadCls().set_field_id("id1").set_old_value("a").set_new_value("b")
-    p2 = PayloadCls().set_field_name("Name")
-    ev.add_payload(p1).add_payload(p2)
+    ev.set_payload(p1)
+    #p2 = PayloadCls().set_field_name("Name")
+    #ev.add_payload(p1).add_payload(p2)
 
     out = ev.dump()
-    assert "payload" in out and isinstance(out["payload"], list)
-    assert {"field_id": "id1", "old_value": "a", "new_value": "b"} in out["payload"]
-    assert {"field_name": "Name"} in out["payload"]
+    print(out)
+    assert "payload" in out and isinstance(out["payload"], dict)
+    assert {"field_id": "id1", "old_value": "a", "new_value": "b"}.items() == out["payload"].items()
+    #assert {"field_name": "Name"} in out["payload"]

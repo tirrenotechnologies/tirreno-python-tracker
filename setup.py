@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 
 setup(
     name="tirreno_tracker",
-    version="0.1.0b1",
-    description="tirreno python tracker",
+    version="0.1.0b2",
+    description="Python client for tirreno security analytics API",
     license="BSD-3-Clause",
     author="tirreno technologies sàrl",
     author_email="team@tirreno.com",
@@ -14,7 +14,7 @@ setup(
         "Homepage": "https://www.tirreno.com",
         "Source Code": "https://github.com/tirrenotechnologies/tirreno-python-tracker"
     },
-    long_description="This is a Python implementation of the tirreno API based on PHP version.",
+    long_description="This is a Python implementation of the tirreno security analytics API based on PHP version.",
     long_description_content_type="text/x-rst",
     keywords=[
         "tirreno",
