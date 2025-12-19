@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="tirreno_tracker",
-    version="0.1.0b2",
+    version="0.1.0b3",
     description="Python client for tirreno security analytics API",
     license="BSD-3-Clause",
     author="tirreno technologies sàrl",

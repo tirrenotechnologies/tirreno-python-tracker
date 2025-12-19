@@ -5,21 +5,19 @@ Send data from your Python application to tirreno console.
 ```python
 from tirreno_tracker import Tracker
 
-tirreno_url = "https://example.tld";
-tracking_id = "XXX";
+tirreno_url = "https://example.tld"
+tracking_id = "XXX"
 
 tracker = Tracker(tirreno_url, tracking_id)
 
 event = tracker.create_event()
 
-# current_user.username     = "johndoe42"
-# current_user.ip_address   = "1.1.1.1"
-# current_user.user_agent   = "Mozilla/5.0"
-# current_user.url          = "/login"
-event.set_user_name(current_user.username) \
-    .set_ip_address(current_user.ip_address) \
-    .set_user_agent(current_user.user_agent) \
-    .set_url(current_user.url) \
+event.set_user_name('johndoe42') \
+    .set_ip_address('1.1.1.1') \
+    .set_url('/url') \
+    .set_user_agent('Mozilla/5.0 (X11; Linux x86_64)') \
+    .set_browser_language('fr-FR,fr;q=0.9') \
+    .set_http_method('POST') \
     .set_event_type_account_login()
 
 tracker.track(event)

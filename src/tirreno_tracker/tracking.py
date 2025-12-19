@@ -205,7 +205,7 @@ class Event:
         return self._user_agent
 
     def set_browser_language(self, value: str) -> EventType:
-        self._browser_anguage = value
+        self._browser_language = value
         return self
 
     def get_browser_language(self) -> Optional[str]:
