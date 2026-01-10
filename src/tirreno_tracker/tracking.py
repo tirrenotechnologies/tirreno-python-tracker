@@ -369,7 +369,7 @@ class Tracker:
         event_timeout: int = 30,
         connection_timeout: int = 3,
     ) -> None:
-        self._url = api_url
+        self._url = self.normalize_url(api_url)
         self._headers = {
             "Content-Type": "application/x-www-form-urlencoded",
             "Api-Key": api_key,
@@ -377,6 +377,13 @@ class Tracker:
         self._timeout = connection_timeout
         self._events = {}
         self._event_timeout = event_timeout
+
+
+    def normalize_url(self, url: str) -> str:
+        url = url if url.endswith('/') else url + '/'
+        url = url if url.endswith('/sensor/') else url + 'sensor/'
+
+        return url
 
     def create_event(self) -> Event:
         now = int(datetime.now(timezone.utc).timestamp())

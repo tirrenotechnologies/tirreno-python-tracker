@@ -1,12 +1,12 @@
 # tirreno Python tracker library
 
-Send data from your Python application to tirreno console.
+This is the official Python implementation of the [tirreno Tracking API](https://docs.tirreno.com/api-integration.html).
 
 ```python
 from tirreno_tracker import Tracker
 
-tirreno_url = "https://example.tld"
-tracking_id = "XXX"
+tirreno_url = "https://example.tld/sensor/" # Sensor URL
+tracking_id = "XXX" # Tracking ID
 
 tracker = Tracker(tirreno_url, tracking_id)
 
